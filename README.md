@@ -1,11 +1,11 @@
 # Learning GraphQL
 
+## Notes and examples from <https://www.howtographql.com/>
+
 - [Queries - how to get data](#queries---how-to-get-data)
 - [Mutations - how to change data](#mutations---how-to-change-data)
 - [Subscriptions - how to get realtime data](#subscriptions---how-to-get-realtime-data)
 - [Schemas - how to define data and what you can do with it](#schemas---how-to-define-data-and-what-you-can-do-with-it)
-
-## Notes and examples from <https://www.howtographql.com/>
 
 ### Queries - how to get data
 
