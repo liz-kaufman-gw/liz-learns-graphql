@@ -94,9 +94,9 @@ query {
 {
   "data": {
     "allPersons": [
-      {name: "Mary"},
-      {name: "Sue"},
-      {name: "Bob"},
+      {"name": "Mary"},
+      {"name": "Sue"},
+      {"name": "Bob"},
     ]
   }
 }
