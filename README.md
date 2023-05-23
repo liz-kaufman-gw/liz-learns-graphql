@@ -19,12 +19,18 @@
       - [Variables](#variables)
       - [Directives](#directives)
 
-## Sources
+## Resources
 
 Information and examples in the notes below are distilled from:
 
 - [HowtographQL.com - Core Concepts](https://www.howtographql.com/basics/2-core-concepts/)
 - [GraphQL docs - Learn section](https://graphql.org/learn/)
+
+Other resources:
+
+- [Public GraphQL APIs list](https://github.com/graphql-kit/graphql-apis)
+- [awesome-graphql](https://github.com/chentsulin/awesome-graphql)
+- [How to Fetch Data in React from a GraphQL API](https://www.freecodecamp.org/news/5-ways-to-fetch-data-react-graphql/)
 
 ## Notes - BASICS
 
@@ -128,6 +134,8 @@ Mutations change data in three different ways (basically completing CRUD!):
 - Updating existing data
 - Deleting existing data
 
+While query fields are executed in parallel, mutation fields run in series, one after the other. If two mutations are in the same request, the first has to finish before the second begins (synchronous) to avoid race conditions.
+
 Mutations have similar structures to queries but use the `mutation` keyword instead:
 
 ```graphql
@@ -146,7 +154,7 @@ To which the server would return:
 "createPerson": { 
   "name": "Bob", 
   "age": 36, 
-  id: "askdjfoe12342"
+  "id": "askdjfoe12342"
 }
 ```
 
@@ -238,6 +246,8 @@ type Post {
   author: Person! 
 }
 ```
+
+👀 See [this page] on the GraphQL docs for more information on schemas! 👀
 
 ## Notes - ADVANCED
 
