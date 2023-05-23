@@ -30,23 +30,23 @@ Information and examples in the notes below are distilled from:
 
 ### Queries - how to get data
 
-- A _query_ includes all data requirements, and _only_ the required data (so not fetching everything included in a resource!)
+A _query_ includes all data requirements, and _only_ the required data (so not fetching everything included in a resource!)
 
-  - This solves overfetching (having to download superflous info from an endpoint) and underfetching (having to make multiple requests to get the exact info needed).
-  - Example below - I'm only asking for the name and the title of posts by the person with that id. If there's other info (address, email, DOB, etc.), my request won't bring it back unless I change the query to ask for it too.
+- This solves overfetching (having to download superflous info from an endpoint) and underfetching (having to make multiple requests to get the exact info needed).
+- Example below - I'm only asking for the name and the title of posts by the person with that id. If there's other info (address, email, DOB, etc.), my request won't bring it back unless I change the query to ask for it too.
 
-- The query has the same shape as the result the server sends back - you always get what you expect.
+The query has the same shape as the result the server sends back - you always get what you expect.
 
-- Instead of REST's multiple endpoints with clearly defined structure of info they return, GraphQL exposes one single endpoint.
+Instead of REST's multiple endpoints with clearly defined structure of info they return, GraphQL exposes one single endpoint.
 
-- Anatomy of a query:
+Anatomy of a query:
 
-  - _Field_ -> each bit of info asked for by the query
-  - _Root field_ -> the "base" field of the query (here, it's `allPersons`)
-  - _Payload_ -> everything that follows the root field (all the specified fields inside the `{}` after the root field)
-  - _Argument_ -> each field can have arguments as specified in the schema as key-value pairs in `()`
+- _Field_ -> each bit of info asked for by the query
+- _Root field_ -> the "base" field of the query (here, it's `allPersons`)
+- _Payload_ -> everything that follows the root field (all the specified fields inside the `{}` after the root field)
+- _Argument_ -> each field can have arguments as specified in the schema as key-value pairs in `()`
 
-- Examples:
+Examples:
 
 **Querying by id to find a specific person**
 
@@ -122,13 +122,13 @@ Here, the height field is set up in the schema to accept an argument of unit of 
 
 ### Mutations - how to change data
 
-- Mutations change data in three different ways (basically completing CRUD!):
+Mutations change data in three different ways (basically completing CRUD!):
 
-  - Creating new data
-  - Updating existing data
-  - Deleting existing data
+- Creating new data
+- Updating existing data
+- Deleting existing data
 
-- Mutations have similar structures to queries but use the `mutation` keyword instead:
+Mutations have similar structures to queries but use the `mutation` keyword instead:
 
 ```graphql
 mutation {
@@ -142,7 +142,7 @@ mutation {
 
 To which the server would return:
 
-```graphql
+```json
 "createPerson": { 
   "name": "Bob", 
   "age": 36, 
@@ -150,15 +150,15 @@ To which the server would return:
 }
 ```
 
-- Anatomy of a mutation:
+Anatomy of a mutation:
 
-  - Still has a _root_ field (here, it's createPerson)
-  - Still handing in _arguments_ in `()`
-  - Still asking for a _payload_; here, it's name and age, similar to sending back the new object in the response after a POST request with REST, but you can also ask for other info in the payload not related to the data you've added or changed. This way, you can do a mutation and the function of a query in the same trip!
+- Still has a _root_ field (here, it's createPerson)
+- Still handing in _arguments_ in `()`
+- Still asking for a _payload_; here, it's name and age, similar to sending back the new object in the response after a POST request with REST, but you can also ask for other info in the payload not related to the data you've added or changed. This way, you can do a mutation and the function of a query in the same trip!
 
-- Usual pattern for IDs: server generates one when a object is created (similar to how REST APIs usually handle POST).
+Usual pattern for IDs: server generates one when a object is created (similar to how REST APIs usually handle POST).
 
-- If you wanted to confirm that the new person was created correctly (and have the id, the info that wasn't available beforehand since you already had name and age), you could just shorten the mutation to:
+If you wanted to confirm that the new person was created correctly (and have the id, the info that wasn't available beforehand since you already had name and age), you could just shorten the mutation to:
 
 ```graphql
 mutation {
@@ -170,10 +170,10 @@ mutation {
 
 ### Subscriptions - how to get realtime data
 
-- _Subscriptions_ let you have a realtime connection to a server to get immediate info about important events (stream of info rather than request/response pattern).
+_Subscriptions_ let you have a realtime connection to a server to get immediate info about important events (stream of info rather than request/response pattern).
 
-  - Subscribing to an event initiates and holds a connection to the server. When that event then happens, the server sends the data to the client.
-  - Subscriptions use similar syntax as queries and mutations.
+- Subscribing to an event initiates and holds a connection to the server. When that event then happens, the server sends the data to the client.
+- Subscriptions use similar syntax as queries and mutations.
 
 ```graphql
 subscription { 
@@ -184,29 +184,31 @@ subscription {
 }
 ```
 
-- Now, whenever a mutation happens that creates a new person, the server sends over the name and age of the new person to the client.
+Now, whenever a mutation happens that creates a new person, the server sends over the name and age of the new person to the client.
 
 ### Schemas - how to define data and what you can do with it
 
-- GraphQL uses a strong type system to define what data the API can offer.
+GraphQL uses a strong type system to define what data the API can offer.
 
-  - All the types that are exposed in an API are written down in a schema using the GraphQL Schema Definition Language (SDL).
-  - This schema serves as the contract between the client and the server to define how a client can access the data.
-  - This means that once the FE and BE agree on the schema, both can do their work without having to talk about it further as they're both aware of exactly what data the API is sending.
-  - This also makes it easy for FE to quickly mock the required data structure, exactly how it comes in from the API, so they can just flip the switch when they're ready to live data.
+- All the types that are exposed in an API are written down in a schema using the GraphQL Schema Definition Language (SDL).
+- This schema serves as the contract between the client and the server to define how a client can access the data.
+- This means that once the FE and BE agree on the schema, both can do their work without having to talk about it further as they're both aware of exactly what data the API is sending.
+- This also makes it easy for FE to quickly mock the required data structure, exactly how it comes in from the API, so they can just flip the switch when they're ready to live data.
 
-- Schemas are collections of GraphQL types.
+Schemas are collections of GraphQL types.
 
-  - `!` means required
-  - Types can contain one-to-many relationships, like between `Person` and `Post` since `posts` is an array of posts.
+- `!` means required
+- Types can contain one-to-many relationships, like between `Person` and `Post` since `posts` is an array of posts.
 
-- Three special _root types_:
+Three special _root types_:
 
-  - `type Query { ... }`
-  - `type Mutation { ... }`
-  - `type Subscription { ... }`
+- `type Query { ... }`
+- `type Mutation { ... }`
+- `type Subscription { ... }`
 
-- These root types define entry points for client requests. Example of full schema:
+These root types define entry points for client requests.
+
+Example of full schema:
 
 ```graphql
 type Query { 
@@ -243,13 +245,13 @@ type Post {
 
 #### Operation names
 
-- You can name queries or other operations with an _operation name_.
+You can name queries or other operations with an _operation name_.
 
-  - This is optional and gives a meaningful name for the operation and is useful in documents with multiple operations.
-  - You can look for the operation name in logs and errors when debugging!
-  - This is similar to how you can either have anonymous or named functions in JS.
+- This is optional and gives a meaningful name for the operation and is useful in documents with multiple operations.
+- You can look for the operation name in logs and errors when debugging!
+- This is similar to how you can either have anonymous or named functions in JS.
 
-- After the operation type (query, mutation, or subscription), add the name before opening the `{}`. In the example, the operation name is `HeroNameAndFriends`.
+After the operation type (query, mutation, or subscription), add the name before opening the `{}`. In the example, the operation name is `HeroNameAndFriends`.
 
 ```graphql
 query HeroNameAndFriends {
@@ -264,12 +266,12 @@ query HeroNameAndFriends {
 
 #### Aliases
 
-- _Aliases_ let you rename fields in the resulting data.
+_Aliases_ let you rename fields in the resulting data.
 
-  - If we want to get info on two different heroes in the same query, our results JSON would try to include two identical keys of `"name"`, which wouldn't work since key names need to be unique.
-  - Instead, aliases let us rename them to `"empireHero"` and `"jediHero"`.
+- If we want to get info on two different heroes in the same query, our results JSON would try to include two identical keys of `"name"`, which wouldn't work since key names need to be unique.
+- Instead, aliases let us rename them to `"empireHero"` and `"jediHero"`.
 
-- Because you can't do:
+Because you can't do:
 
 ```graphql
 { 
@@ -284,7 +286,7 @@ query HeroNameAndFriends {
 }
 ```
 
-- You can use aliases to do this instead:
+You can use aliases to do this instead:
 
 ```graphql
 { 
@@ -299,7 +301,7 @@ query HeroNameAndFriends {
 }
 ```
 
-- Resulting in:
+Resulting in:
 
 ```json
 { 
@@ -316,12 +318,13 @@ query HeroNameAndFriends {
 
 #### Fragments
 
-- _Fragments_ let you construct a set of fields that you'll use multiple times in a query and condense them into a set you can call again and again (almost like saving them in a variable).
-- Example:
+_Fragments_ let you construct a set of fields that you'll use multiple times in a query and condense them into a set you can call again and again (almost like saving them in a variable).
 
-  - We need two heroes to compare (aliased accordingly) with an identical set of fields.
-  - We can create a fragment of the fields (`comparisonFields`) on type `Character` to use in the query instead of rewriting the same set of fields each time.
-  - Access the fragment with the spread operator. You can use the fragment as many times as you want.
+Example:
+
+- We need two heroes to compare (aliased accordingly) with an identical set of fields.
+- We can create a fragment of the fields (`comparisonFields`) on type `Character` to use in the query instead of rewriting the same set of fields each time.
+- We access the fragment with the spread operator. You can use the fragment as many times as you want.
 
 ```graphql
 { 
@@ -370,17 +373,19 @@ fragment comparisonFields on Character {
 
 #### Variables
 
-- _Variables_ allow for dynamic argument fields, where GraphQL grabs the dynamic values out of the query and passes them through as a separate dictionary.
-- The alternative would be trying to dynamically manipulate the query at runtime and then make sure it was still a properly GraphQL-specific format. We want to avoid manually interpolating the string!
-- Steps:
+_Variables_ allow for dynamic argument fields, where GraphQL grabs the dynamic values out of the query and passes them through as a separate dictionary.
 
-  1. Replace the static value in the query with `$variableName`
-  2. Declare `$variableName` as one of the variables accepted by the query
-  3. Pass `variableName: value` in the separate, transport-specific (usually JSON) variables dictionary
+The alternative would be trying to dynamically manipulate the query at runtime and then make sure it was still a properly GraphQL-specific format. We want to avoid manually interpolating the string!
 
-- This is a lot like the parameterized queries in SQL, only with the variables and values in a separate object rather than an array.
+Steps:
 
-- So the query looks like:
+1. Replace the static value in the query with `$variableName`
+2. Declare `$variableName` as one of the variables accepted by the query
+3. Pass `variableName: value` in the separate, transport-specific (usually JSON) variables dictionary
+
+This is a lot like the parameterized queries in SQL, only with the variables and values in a separate object rather than an array.
+
+So the query looks like:
 
 ```graphql
 query HeroNameAndFriends($episode: Episode = PHANTOM) {
@@ -395,7 +400,7 @@ query HeroNameAndFriends($episode: Episode = PHANTOM) {
 
 (You can add a default value with `=` just like in JS/React, like `PHANTOM` here.)
 
-- The separate JSON with the variable definitions looks like:
+The separate JSON with the variable definitions looks like:
 
 ```json
 {
@@ -403,7 +408,7 @@ query HeroNameAndFriends($episode: Episode = PHANTOM) {
 }
 ```
 
-- And the results are:
+And the results are:
 
 ```json
 {
@@ -428,14 +433,14 @@ query HeroNameAndFriends($episode: Episode = PHANTOM) {
 
 #### Directives
 
-- _Directives_ let us dynamically change the structure of our queries with boolean variables.
-- This avoids having to do string manipulation to add/remove fields in a query!
-- Two core directives:
+_Directives_ let us dynamically change the structure of our queries with boolean variables. This avoids having to do string manipulation to add/remove fields in a query!
 
-  - `@include(if: Boolean)` - only include this field in the results if true
-  - `@skip(if: Boolean)` - only skip this field if the results if true (the opposite)
+Two core directives:
 
-- Query:
+- `@include(if: Boolean)` - only include this field in the results if true
+- `@skip(if: Boolean)` - only skip this field if the results if true (the opposite)
+
+Query:
 
 ```graphql
 query Hero($episode: Episode, $withFriends: Boolean!) {
@@ -448,7 +453,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 }
 ```
 
-- If this variables object is included:
+If this variables object is included:
 
 ```json
 {
@@ -457,7 +462,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 }
 ```
 
-- Results only show:
+Results only show:
 
 ```json
 {
@@ -469,7 +474,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 }
 ```
 
-- Instead, if the variables object is:
+Instead, if the variables object is:
 
 ```json
 {
@@ -478,7 +483,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 }
 ```
 
-- Results show:
+Results show:
 
 ```json
 {
