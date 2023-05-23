@@ -1,21 +1,21 @@
 # Learning GraphQL
 
-  - [Notes - BASICS](#notes---basics)
+- [Notes - BASICS](#notes---basics)
 
-    - [Queries - how to get data](#queries---how-to-get-data)
-    - [Mutations - how to change data](#mutations---how-to-change-data)
-    - [Subscriptions - how to get realtime data](#subscriptions---how-to-get-realtime-data)
-    - [Schemas - how to define data and what you can do with it](#schemas---how-to-define-data-and-what-you-can-do-with-it)
+  - [Queries - how to get data](#queries---how-to-get-data)
+  - [Mutations - how to change data](#mutations---how-to-change-data)
+  - [Subscriptions - how to get realtime data](#subscriptions---how-to-get-realtime-data)
+  - [Schemas - how to define data and what you can do with it](#schemas---how-to-define-data-and-what-you-can-do-with-it)
 
-  - [Notes - ADVANCED](#notes---advanced)
+- [Notes - ADVANCED](#notes---advanced)
 
-    - [Advanced query tools](#advanced-query-tools)
+  - [Advanced query tools](#advanced-query-tools)
 
-      - [Operation names](#operation-names)
-      - [Aliases](#aliases)
-      - [Fragments](#fragments)
-      - [Variables](#variables)
-      - [Directives](#directives)
+    - [Operation names](#operation-names)
+    - [Aliases](#aliases)
+    - [Fragments](#fragments)
+    - [Variables](#variables)
+    - [Directives](#directives)
 
 ## Resources
 
@@ -29,6 +29,9 @@ Other resources:
 - [Public GraphQL APIs list](https://github.com/graphql-kit/graphql-apis)
 - [awesome-graphql](https://github.com/chentsulin/awesome-graphql)
 - [How to Fetch Data in React from a GraphQL API](https://www.freecodecamp.org/news/5-ways-to-fetch-data-react-graphql/)
+- [Apollo Odyssey GraphQL tutorial](https://www.apollographql.com/tutorials/)
+- [graphql-request package](https://www.npmjs.com/package/graphql-request)
+- [React + Apollo tutorial](https://www.howtographql.com/react-apollo)
 
 ## Notes - BASICS
 
