@@ -1,7 +1,5 @@
 # Learning GraphQL
 
-- [Sources](#sources)
-
   - [Notes - BASICS](#notes---basics)
 
     - [Queries - how to get data](#queries---how-to-get-data)
